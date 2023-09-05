@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Il mio sito Django{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    
+    <!-- Qui potresti includere link a CSS, JavaScript, favicon, etc. -->
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+
+    <!-- Barra di navigazione -->
+    <nav>
+        <a href="">Home</a>
+        <a href="">Posts</a>
+        <!-- Aggiungi altre voci di navigazione qui -->
+    </nav>
+
+    <!-- Contenuto principale del sito -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Il mio sito Django. Tutti i diritti riservati.</p>
+    </footer>
+
+    <!-- Qui potresti includere script JavaScript -->
+    {% block extrascripts %}{% endblock %}
+
+</body>
+</html>
