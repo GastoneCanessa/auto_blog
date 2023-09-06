@@ -3,6 +3,13 @@
 {% block content %}
     <h1>Elenco dei Post</h1>
 
+    <form action="{% url 'generate_post' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Crea nuovo post" {% if not show_button %}disabled{% endif %}>
+        {% if not show_button %} <p style="color:red";> Il post è già stato generato oggi! </p> {% endif %}
+    </form>
+
+
     <ul>
     {% for post in posts %}
         <li>
