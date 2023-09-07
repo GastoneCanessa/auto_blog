@@ -34,5 +34,13 @@
     <!-- Qui potresti includere script JavaScript -->
     {% block extrascripts %}{% endblock %}
 
+    <script>
+        const socket = new WebSocket('ws://localhost:8000/ws/some_path/');
+
+        socket.onmessage = function(e) {
+            location.reload();
+        };
+    </script>
+
 </body>
 </html>
