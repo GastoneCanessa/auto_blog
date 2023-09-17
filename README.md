@@ -36,13 +36,13 @@ This project leverages Django to set up a blog that automatically generates a po
     daphne project.asgi:application
 
 # start the Redis server:
-redis-server
+    redis-server
 
 # Start Celery Beat:
-celery -A project beat --loglevel=info
+    celery -A project beat --loglevel=info
 
 # Start Celery Worker:
-celery -A project worker --loglevel=info
+    celery -A project worker --loglevel=info
 
 
 # For any further assistance or issues, please [open a GitHub issue](https://github.com/GastoneCanessa/auto_blog/issues) or contact the repository owner.

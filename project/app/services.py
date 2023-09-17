@@ -9,9 +9,11 @@ openai.api_key = os.environ.get("OPENAI_KEY")
 
 
 def generate_post_content(prompt):
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        max_tokens=500
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo", 
+        messages=[
+                {"role": "system", "content": "Sei un assistente che scrive post di alta qualità sulle innovazioni tecnologiche che hanno cambiato il mondo."},
+                {"role": "user", "content": prompt}
+            ]
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message['content']

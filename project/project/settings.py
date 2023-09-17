@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'app',
     'django_celery_beat',
     'channels',
-    'channels_redis'
+    'channels_redis',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

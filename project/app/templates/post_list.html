@@ -14,7 +14,7 @@
     {% for post in posts %}
         <li>
             <h2>{{ post.title }}</h2>
-            <p>Scritto il {{ post.date_created|date:"d F Y" }}</p>
+            <p>Scritto il {{ post.date_created|date:"d F Y H:i" }} UTC</p>
             <p>{{ post.content }}</p>
         </li>
     {% endfor %}
