@@ -11,29 +11,29 @@ This project leverages Django to set up a blog that automatically generates a po
 
 1. Clone the repository
 
-git clone https://github.com/GastoneCanessa/auto_blog.git
-cd auto_blog
+    git clone https://github.com/GastoneCanessa/auto_blog.git
+    cd auto_blog
 
 
 2. Create a virtual environment
 
-python3 -m venv env
-source env/bin/activate  # On Windows, use `env\Scripts\activate`
+    python3 -m venv env
+    source env/bin/activate  # On Windows, use `env\Scripts\activate`
 
 
 3. Install dependencies
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 4. Setup .env file
 
-OPENAI_KEY=your_openai_key
-SECRET_KEY=your_secret_key_for_django
+    OPENAI_KEY=your_openai_key
+    SECRET_KEY=your_secret_key_for_django
 
 4. Run the project
 
-#Start the asynchronous server with Daphne:
-daphne project.asgi:application
+    #Start the asynchronous server with Daphne:
+    daphne project.asgi:application
 
 # start the Redis server:
 redis-server
