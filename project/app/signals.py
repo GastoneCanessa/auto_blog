@@ -23,6 +23,3 @@ def notify_new_post(sender, instance, created, **kwargs):
                 'content': instance.content
             }
         )
-
-        print('segnale inviato ')
-    print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')

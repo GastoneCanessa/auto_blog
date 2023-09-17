@@ -23,7 +23,6 @@ def generate_post(request):
     content = generate_post_content("Scrivi un articolo sulle ultime tendenze della tecnologia.")
     post = Post(title=title, content=content)
     post.save()
-    print('post creato')
     # return JsonResponse({"status": "success", "title": title, "content": content})
     return HttpResponseRedirect('/blog/')
 
