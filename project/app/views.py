@@ -2,23 +2,22 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Post
 from .services import generate_post_content
-from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest
 from django.core.cache import cache
-from datetime import datetime, date
+from datetime import date
 from celery import shared_task
-from django.urls import reverse
 
 
-def generate_post(request):
-    # Controlla l'ultima data di accesso dal cache
-    last_accessed = cache.get('last_accessed_date')
+def create_post(request):
+    # # Controlla l'ultima data di accesso dal cache
+    # last_accessed = cache.get('last_accessed_date')
 
-    # Se la view è stata già acceduta oggi, rifiuta l'accesso
-    if last_accessed == date.today():
-        return HttpResponse("Questa funzione può essere chiamata solo una volta al giorno.")
+    # # Se la view è stata già acceduta oggi, rifiuta l'accesso
+    # if last_accessed == date.today():
+    #     return HttpResponse("Questa funzione può essere chiamata solo una volta al giorno.")
 
-    # Altrimenti, aggiorna la data di accesso nel cache
-    cache.set('last_accessed_date', date.today())
+    # # Altrimenti, aggiorna la data di accesso nel cache
+    # cache.set('last_accessed_date', date.today())
 
     response_content = generate_post_content('Scrivi un articolo su una curiosità in ambito tecnologico in stile divulgativo. deve avere un Titolo: " " e un Contenuto: " "')
 
@@ -32,15 +31,18 @@ def generate_post(request):
 
     post = Post(title=titolo, content=contenuto)
     post.save()
-    # return JsonResponse({"status": "success", "title": title, "content": content})
-    return HttpResponseRedirect(reverse('list'))
+
+    if post.id:  # Verifica se il post è stato salvato correttamente
+        return JsonResponse({ "success": True, "message": "Post created successfully" })
+    else:
+        return JsonResponse({ "success": False, "message": "Error in creating post" })
 
 
 @shared_task
 def call_my_view_task():
     request = HttpRequest()
     request.method = 'POST'
-    response = generate_post(request)
+    response = create_post(request)
     return response
 
 

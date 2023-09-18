@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <ul>
+    <ul class="post-list">
       <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
     </ul>
   </div>
@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
+      socket: null
     };
   },
   mounted() {
@@ -28,6 +29,19 @@ export default {
       .catch(error => {
         console.error("There was an error fetching the posts", error);
       });
+
+    this.initializeWebSocket();  
+  },
+  methods: {
+      initializeWebSocket() {
+          this.socket = new WebSocket('ws://localhost:8000/ws/some_path/');
+          
+          this.socket.onmessage = () => {
+              location.reload(); // Ricarica la pagina quando ricevi un messaggio.
+          };
+
+          // Puoi anche gestire altri eventi del socket qui, come onclose, onerror, etc.
+      }
   }
 }
 </script>
@@ -47,5 +61,16 @@ li {
 }
 a {
   color: #42b983;
+}
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+.post-list li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #42b983;
+}
+.post-list li:last-child {
+    border-bottom: none;
 }
 </style>

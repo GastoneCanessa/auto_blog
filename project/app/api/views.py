@@ -5,6 +5,6 @@ from app.api.permissions import ReadOnlyPermission
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-date_created')
     serializer_class = PostSerializer
     permission_classes = [ReadOnlyPermission]
